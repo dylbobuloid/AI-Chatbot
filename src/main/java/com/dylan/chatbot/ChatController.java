@@ -1,17 +1,24 @@
 package com.dylan.chatbot;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
 
+    @Autowired
+    private ClaudeService claudeService;
+
+    @RequestMapping("/")
+    public String helloWorld(){
+        return "Hello World";
+    }
     @PostMapping("/message")
-    public String sendMessage(@RequestBody String userMessage) {
-        // We'll add chatbot logic here
-        return "You said: " + userMessage;
+    public String sendMessage(@RequestBody String userMessage) throws IOException, InterruptedException {
+
+        return claudeService.sendMessage(userMessage);
     }
 }

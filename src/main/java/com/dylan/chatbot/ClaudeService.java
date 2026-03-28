@@ -1,12 +1,7 @@
 package com.dylan.chatbot;
 
 import com.google.gson.Gson;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +13,7 @@ import java.net.http.HttpResponse;
 @Service
 public class ClaudeService {
 
-    public void sendMessage(String userMessage) throws IOException, InterruptedException {
+    public String sendMessage(String userMessage) throws IOException, InterruptedException {
         Gson gson = new Gson();
         String apiKey = System.getenv("ANTHROPIC_API_KEY");
         HttpClient client = HttpClient.newHttpClient();
@@ -41,6 +36,7 @@ public class ClaudeService {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 
 }
