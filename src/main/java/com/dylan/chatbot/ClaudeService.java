@@ -36,7 +36,9 @@ public class ClaudeService {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
+        ClaudeResponse data = gson.fromJson(response.body(), ClaudeResponse.class);
+        return data.content[0].text;
+
     }
 
 }
