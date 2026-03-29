@@ -1,36 +1,29 @@
-
-
 function sendMessage(){
     let message = document.getElementById("user-input").value
     console.log("This is your message: ", message)
     addToLogUser(message)
     messageReq(message)
-
-
+    document.getElementById("user-input").value = ""
 }
 
 function addToLogBot(message){
-    
     const chatBox = document.getElementById("chat-box")
     const newDiv = document.createElement("div")
-
     const userText = document.createTextNode("BOT --> " + message)
-    newDiv.setAttribute("id", "user-message")
+    newDiv.setAttribute("class", "message bot")
     newDiv.appendChild(userText)
     chatBox.appendChild(newDiv)
-
+    chatBox.scrollTop = chatBox.scrollHeight
 }
 
 function addToLogUser(message){
-
     const chatBox = document.getElementById("chat-box")
     const newDiv = document.createElement("div")
-
     const userText = document.createTextNode("USER --> " + message)
-    newDiv.setAttribute("id", "bot-message")
+    newDiv.setAttribute("class", "message user")
     newDiv.appendChild(userText)
     chatBox.appendChild(newDiv)
-
+    chatBox.scrollTop = chatBox.scrollHeight
 }
 
 function messageReq(message){
@@ -45,12 +38,15 @@ function messageReq(message){
         if (!response.ok) {
             throw new Error("Could not fetch resource");
         }
-        return response.text()  
+        return response.text()
     })
     .then(data => {
         console.log(data)
-        addToLogBot(data)  // Display Claude's response
+        addToLogBot(data)
     })
     .catch(error => console.error(error))
-    
 }
+
+document.getElementById("user-input").addEventListener("keydown", function(e){
+    if (e.key === "Enter") sendMessage()
+})

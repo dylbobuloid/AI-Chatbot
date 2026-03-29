@@ -2,15 +2,28 @@
 <html>
 <head>
     <title>Customer Support Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Customer Support</h1>
-<div id="chat-box"></div>
-<div id="input-area">
-    <input id="user-input" placeholder="Type your message...">
-    <button onclick="sendMessage()">Send</button>
+
+<div class="chat-wrapper">
+    <div class="chat-header">
+        <div class="status-dot"></div>
+        <h1>Customer Support</h1>
+        <span>AI · online</span>
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div id="input-area">
+        <input id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
