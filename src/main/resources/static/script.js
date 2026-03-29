@@ -21,6 +21,18 @@ function addToLogUser(message){
 
 }
 
+function addToLogUser(message){
+
+    const chatBox = document.getElementById("chat-box")
+    const newDiv = document.createElement("div")
+
+    const userText = document.createTextNode("BOT --> " + message)
+    newDiv.setAttribute("id", "bot-message")
+    newDiv.appendChild(userText)
+    chatBox.appendChild(newDiv)
+
+}
+
 function messageReq(message){
     fetch('http://localhost:8080/api/chat/message', {
         method: 'POST',

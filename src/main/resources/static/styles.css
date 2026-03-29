@@ -32,6 +32,11 @@ body {
     text-align: right;
 }
 
+.user-message {
+    background: #8cefb2;
+    text-align: right;
+}
+
 #input-area {
     display: flex;
     gap: 10px;
