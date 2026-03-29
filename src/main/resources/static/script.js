@@ -20,3 +20,23 @@ function addToLogUser(message){
     chatBox.appendChild(newDiv)
 
 }
+
+function messageReq(){
+        fetch(`http://localhost:8080/api/chat/message`)
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Could not fetch resource");
+
+            }
+            //Have to return the result of the promise to the local browser?
+            return response.json()
+        })
+
+        .then(data => {
+
+            console.log(data)
+
+        })
+        .catch(error => console.error(error))
+}
