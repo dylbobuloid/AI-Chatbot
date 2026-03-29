@@ -4,7 +4,7 @@ function sendMessage(){
     let message = document.getElementById("user-input").value
     console.log("This is your message: ", message)
     addToLogUser(message)
-
+    messageReq()
 
 
 }
@@ -21,22 +21,24 @@ function addToLogUser(message){
 
 }
 
-function messageReq(){
-        fetch(`http://localhost:8080/api/chat/message`)
-        .then(response => {
-
-            if (!response.ok) {
-                throw new Error("Could not fetch resource");
-
-            }
-            //Have to return the result of the promise to the local browser?
-            return response.json()
-        })
-
-        .then(data => {
-
-            console.log(data)
-
-        })
-        .catch(error => console.error(error))
+function messageReq(message){
+    fetch('http://localhost:8080/api/chat/message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: message
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Could not fetch resource");
+        }
+        return response.text()  
+    })
+    .then(data => {
+        console.log(data)
+        addToLogBot(data)  // Display Claude's response
+    })
+    .catch(error => console.error(error))
+    
 }
