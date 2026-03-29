@@ -4,17 +4,17 @@ function sendMessage(){
     let message = document.getElementById("user-input").value
     console.log("This is your message: ", message)
     addToLogUser(message)
-    messageReq()
+    messageReq(message)
 
 
 }
 
-function addToLogUser(message){
+function addToLogBot(message){
     
     const chatBox = document.getElementById("chat-box")
     const newDiv = document.createElement("div")
 
-    const userText = document.createTextNode("USER --> " + message)
+    const userText = document.createTextNode("BOT --> " + message)
     newDiv.setAttribute("id", "user-message")
     newDiv.appendChild(userText)
     chatBox.appendChild(newDiv)
@@ -26,7 +26,7 @@ function addToLogUser(message){
     const chatBox = document.getElementById("chat-box")
     const newDiv = document.createElement("div")
 
-    const userText = document.createTextNode("BOT --> " + message)
+    const userText = document.createTextNode("USER --> " + message)
     newDiv.setAttribute("id", "bot-message")
     newDiv.appendChild(userText)
     chatBox.appendChild(newDiv)
