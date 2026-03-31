@@ -1,19 +1,26 @@
 package com.dylan.chatbot;
 
 import com.google.gson.Gson;
+import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 
 @Service
 public class ClaudeService {
+    @Value("classpath:prompt.txt")
+    Resource promptFile;
+
+
 
     public String sendMessage(String userMessage) throws IOException, InterruptedException {
+        String systemPrompt = new String(promptFile.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         Gson gson = new Gson();
         String apiKey = System.getenv("ANTHROPIC_API_KEY");
         HttpClient client = HttpClient.newHttpClient();
@@ -21,11 +28,12 @@ public class ClaudeService {
                 {
                     "model": "claude-sonnet-4-20250514",
                     "max_tokens": 1024,
+                    "system": %s ,
                     "messages": [
                         {"role": "user", "content": "%s"}
                     ]
                 }
-                """.formatted(userMessage);
+                """.formatted(gson.toJson(systemPrompt), userMessage);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.anthropic.com/v1/messages"))
