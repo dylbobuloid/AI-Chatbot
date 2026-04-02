@@ -1,9 +1,11 @@
 package com.dylan.chatbot;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Message {
      enum Role{
-        USER,
-        ASSISTANT
+        @SerializedName("user")USER,
+        @SerializedName("assistant")ASSISTANT
     }
     Role role;
     String content;
@@ -13,4 +15,14 @@ public class Message {
         this.content = content;
 
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+
 }
