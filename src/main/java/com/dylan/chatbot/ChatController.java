@@ -12,7 +12,7 @@ public class ChatController {
     @Autowired
     private ClaudeService claudeService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String helloWorld(){
         return "Hello World";
     }

@@ -26,7 +26,11 @@ public class ClaudeService {
         messages.add(responseMessage);
     }
 
+    public String setupPrompt(SetupRequest identity){
 
+
+        return null;
+    }
     public String sendMessage(String userMessage) throws IOException, InterruptedException {
         // First we need to create a message object
         // Then we need to add the user message to the array so we can keep a log
